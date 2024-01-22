@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import free.biava.course.entities.Order;
 import free.biava.course.entities.User;
+import free.biava.course.entities.enums.OrderStatus;
 import free.biava.course.repositories.OrderRepository;
 import free.biava.course.repositories.UserRepository;
 
@@ -29,9 +30,9 @@ public class TestConfig implements CommandLineRunner{
 		User user = new User(null, "Cristiano", "cristiano@goatmail.com", "12345-6789", "12345");
 		User user2 = new User(null, "Lionel", "lionel@gmail.com", "54321-9876", "54321");
 		
-		Order o1 = new Order(null, Instant.parse("2024-06-20T19:53:07Z"), user); 
-		Order o2 = new Order(null, Instant.parse("2024-07-21T03:42:10Z"), user2); 
-		Order o3 = new Order(null, Instant.parse("2024-07-22T15:21:22Z"), user);
+		Order o1 = new Order(null, Instant.parse("2024-06-20T19:53:07Z"), OrderStatus.PAID, user); 
+		Order o2 = new Order(null, Instant.parse("2024-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, user2); 
+		Order o3 = new Order(null, Instant.parse("2024-07-22T15:21:22Z"), OrderStatus.SHIPPED, user);
 		
 		userRepository.saveAll(Arrays.asList(user,user2));
 		
