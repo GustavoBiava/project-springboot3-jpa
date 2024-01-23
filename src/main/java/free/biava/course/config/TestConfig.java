@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import free.biava.course.entities.Category;
 import free.biava.course.entities.Order;
+import free.biava.course.entities.OrderItem;
 import free.biava.course.entities.Product;
 import free.biava.course.entities.User;
 import free.biava.course.entities.enums.OrderStatus;
 import free.biava.course.repositories.CategoryRepository;
+import free.biava.course.repositories.OrderItemRepository;
 import free.biava.course.repositories.OrderRepository;
 import free.biava.course.repositories.ProductRepository;
 import free.biava.course.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,7 +74,12 @@ public class TestConfig implements CommandLineRunner{
 		userRepository.saveAll(Arrays.asList(user,user2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice()); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice()); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice()); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3 , oi4));
 		
 	}
 	
