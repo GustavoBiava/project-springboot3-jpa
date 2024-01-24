@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import free.biava.course.entities.Category;
 import free.biava.course.entities.Order;
 import free.biava.course.entities.OrderItem;
+import free.biava.course.entities.Payment;
 import free.biava.course.entities.Product;
 import free.biava.course.entities.User;
 import free.biava.course.entities.enums.OrderStatus;
@@ -81,6 +82,10 @@ public class TestConfig implements CommandLineRunner{
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3 , oi4));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2024-06-20T23:53:07Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 	}
 	
 	
