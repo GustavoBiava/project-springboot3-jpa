@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -99,6 +100,11 @@ public class Order implements Serializable{
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+	
+	public Double getTotal() {
+		Optional<Double> sum = items.stream().map(i -> i.getSubTotal()).reduce((x,y) -> x+y);
+		return sum.get();
 	}
 	
 	@Override
